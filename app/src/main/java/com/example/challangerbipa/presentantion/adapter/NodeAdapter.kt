@@ -1,7 +1,6 @@
-package com.example.challangerbipa.presentantion.adapter
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challangerbipa.data.model.Node
 import com.example.challangerbipa.databinding.ItemNodeBinding
@@ -26,8 +25,10 @@ class NodeAdapter(
     override fun getItemCount(): Int = nodes.size
 
     fun updateNodes(newNodes: List<Node>) {
+        val diffCallback = NodeDiffCallback(nodes, newNodes)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         nodes = newNodes
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
     inner class NodeViewHolder(private val binding: ItemNodeBinding) :
@@ -64,4 +65,20 @@ class NodeAdapter(
     }
 }
 
+class NodeDiffCallback(
+    private val oldList: List<Node>,
+    private val newList: List<Node>
+) : DiffUtil.Callback() {
 
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize(): Int = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition].publicKey == newList[newItemPosition].publicKey
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return oldList[oldItemPosition] == newList[newItemPosition]
+    }
+}
