@@ -1,7 +1,5 @@
 package com.example.challangerbipa.ui
 
-import NodeAdapter
-import NodesViewModel
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context.CLIPBOARD_SERVICE
@@ -15,11 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.challangerbipa.databinding.FragmentHomeBinding
+import com.example.challangerbipa.domain.listener.NodeInteractionListener
+import com.example.challangerbipa.presentantion.adapter.NodeAdapter
+import com.example.challangerbipa.presentantion.viewModel.NodesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), NodeInteractionListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -43,9 +44,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        nodeAdapter = NodeAdapter(emptyList()) { publicKey ->
-            copyPublicKeyToClipboard(publicKey)
-        }
+        nodeAdapter = NodeAdapter(emptyList(), this)
         binding.recyclerViewNodes.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = nodeAdapter
@@ -79,7 +78,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun copyPublicKeyToClipboard(publicKey: String) {
+    override fun onCopyPublicKey(publicKey: String) {
         val clipboard = requireContext().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText("Public Key", publicKey)
         clipboard.setPrimaryClip(clip)

@@ -4,25 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:backgroundTint="@android:color/white"
+    android:backgroundTint="#8491A1"
     android:elevation="6dp"
     android:radius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@drawable/background_bitcoin">>
 
-        <!-- Alias TextView -->
         <TextView
             android:id="@+id/textViewAlias"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Node Alias"
-            android:textColor="@android:color/black"
+            android:textColor="#5C5959"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/imageViewPublicKey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -31,62 +30,50 @@
             app:layout_constraintVertical_bias="0.5"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <!-- Public Key ImageView -->
-        <ImageView
-            android:id="@+id/imageViewPublicKey"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toStartOf="@id/textViewPublicKey"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewAlias"
-            app:tint="@android:color/darker_gray" />
-
-        <!-- Public Key TextView -->
         <TextView
             android:id="@+id/textViewPublicKey"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="216dp"
             android:text="Public Key: ABC123XYZ456..."
-            android:textColor="@android:color/darker_gray"
-            android:textSize="18sp"
+            android:textColor="#5C5959"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageViewPublicKey"
             app:layout_constraintTop_toBottomOf="@id/textViewAlias" />
 
 
         <ImageButton
             android:id="@+id/buttonCopyKey"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="24dp"
+            android:layout_width="34dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Copy Public Key"
+            android:src="@drawable/copy_key"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@id/textViewPublicKey"
             app:layout_constraintTop_toBottomOf="@id/textViewAlias" />
 
-        <!-- Divider View -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="24dp"
-            android:background="@android:color/darker_gray"
+            android:textColor="#5C5959"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewPublicKey" />
 
-        <!-- Channels TextView -->
         <TextView
             android:id="@+id/textViewChannels"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Channels: 10"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="#C8BBBB"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,14 +81,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewPublicKey" />
 
-        <!-- Capacity TextView -->
         <TextView
             android:id="@+id/textViewCapacity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Capacity: 1,000,000 sats"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="#C8BBBB"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,24 +95,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewChannels" />
 
-        <!-- Divider View -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="24dp"
-            android:background="@android:color/darker_gray"
+            android:textColor="#C8BBBB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewCapacity" />
 
-        <!-- First Seen TextView -->
         <TextView
             android:id="@+id/textViewFirstSeen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="First Seen: 2024-08-10T12:34:56Z"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="#C8BBBB"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,14 +118,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewCapacity" />
 
-        <!-- Updated At TextView -->
         <TextView
             android:id="@+id/textViewUpdatedAt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Updated At: 2024-08-11T14:45:23Z"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="#C8BBBB"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,41 +132,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewFirstSeen" />
 
-        <!-- Divider View -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="24dp"
-            android:background="@android:color/darker_gray"
+            android:background="#F40000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewUpdatedAt" />
 
-        <!-- Location ImageView -->
-        <ImageView
-            android:id="@+id/imageViewLocation"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toStartOf="@id/textViewLocation"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textViewUpdatedAt"
-            app:tint="#E80404" />
-
-        <!-- Location TextView -->
         <TextView
             android:id="@+id/textViewLocation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="Location: New York, USA"
-            android:textColor="@android:color/black"
+            android:textColor="#C8BBBB"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@id/imageViewLocation"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewUpdatedAt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

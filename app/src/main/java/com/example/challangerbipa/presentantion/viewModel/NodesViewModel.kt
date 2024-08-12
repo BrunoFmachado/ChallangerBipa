@@ -1,3 +1,5 @@
+package com.example.challangerbipa.presentantion.viewModel
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.challangerbipa.data.model.Node
@@ -26,8 +28,7 @@ class NodesViewModel @Inject constructor(
         _loading.value = true
         viewModelScope.launch {
             try {
-                val nodes = nodeRepository.fetchTopNodes()
-                _nodes.value = nodes
+                _nodes.value = nodeRepository.fetchTopNodes()
                 _error.value = null
             } catch (e: Exception) {
                 _error.value = "Failed to load data"

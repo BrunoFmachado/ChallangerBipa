@@ -1,16 +1,19 @@
+package com.example.challangerbipa.presentantion.adapter
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.challangerbipa.data.model.Node
 import com.example.challangerbipa.databinding.ItemNodeBinding
+import com.example.challangerbipa.domain.listener.NodeInteractionListener
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class NodeAdapter(
     private var nodes: List<Node>,
-    private val listener: (String) -> Unit
+    private val listener: NodeInteractionListener
 ) : RecyclerView.Adapter<NodeAdapter.NodeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NodeViewHolder {
@@ -35,20 +38,21 @@ class NodeAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(node: Node) {
-            binding.textViewAlias.text = node.alias
-            binding.textViewPublicKey.text = "Public Key: ${node.publicKey}"
-            binding.textViewChannels.text = "Channels: ${node.channels}"
-            binding.textViewCapacity.text = "Capacity: ${satsToBtc(node.capacity)}"
-            binding.textViewFirstSeen.text = "First Seen: ${unixTimeToDateTime(node.firstSeen)}"
-            binding.textViewUpdatedAt.text = "Updated At: ${unixTimeToDateTime(node.updatedAt)}"
+            binding.apply {
+                textViewAlias.text = node.alias
+                textViewPublicKey.text = "Public Key: ${node.publicKey}"
+                textViewChannels.text = "Channels: ${node.channels}"
+                textViewCapacity.text = "Capacity: ${satsToBtc(node.capacity)}"
+                textViewFirstSeen.text = "First Seen: ${unixTimeToDateTime(node.firstSeen)}"
+                textViewUpdatedAt.text = "Updated At: ${unixTimeToDateTime(node.updatedAt)}"
 
-            val city = node.city?.get("pt-BR") ?: node.city?.get("en") ?: "Unknown City"
-            val country = node.country?.get("pt-BR") ?: node.country?.get("en") ?: "Unknown Country"
-            val location = "$city, $country"
-            binding.textViewLocation.text = "Location: $location"
+                val city = node.location?.city ?: "Unknown City"
+                val country = node.location?.country ?: "Unknown Country"
+                textViewLocation.text = "Location: $city, $country"
 
-            binding.buttonCopyKey.setOnClickListener {
-                listener.invoke(node.publicKey)
+                buttonCopyKey.setOnClickListener {
+                    listener.onCopyPublicKey(node.publicKey)
+                }
             }
         }
 
